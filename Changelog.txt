@@ -1,0 +1,209 @@
+8.5.0
+- fixed an old bug where the big radarscreen was not showing moving radarimages anymore after showing a still radar image like pollenradar.
+- lon/lat coordinates for the rain prediction tile can now be entered via your mobile phone by scanning a qr code (Thanks TheHogNL)
+- After entering new loat/lon coordinates (either manually or via themobile phone), the nearest weatherstation is automatically selected
+
+8.4.3
+- user settings are now stored in /mnt/data/tsc, preparing for exciting future stuff
+
+8.4.2
+- replaced special character strings by readable charaters (&nbsp and &rsquo) in the weather forecast text
+
+8.4.0
+- removed map from detailed location config screen (Toon is not compatible with google maps anymore)
+- firmware 5 compatibility
+
+8.3.5
+- now compatible with firmware 4.16.8 (weather icon on the tile in dim state was not shown)
+- no need to update when on earlier firmwares
+
+8.3.4
+- added EU map option on big radarscreen
+- corrected version numer (8.3.3 reported itself as 8.3.2)
+
+8.3.3
+- permissions on root folder are not touched anymore (was used in the past for the https workaround)
+- clicking on the rain prediction tile now opens the big radarimage screen
+- clicking on the small buienradarmap in the weather details screen also brings you to the big radarscreen.
+- your exact location can be set now by clicking on 'Locatie' on the big radarimage screen
+  This will exactly position the yellow markers and set the location for the rain tile.
+- added the 'Motregenradar'option to the big radarscreen
+
+
+8.3.2
+- added additonal options on the big buienradarscreen to also select
+  radarimages for the next hour, the next 3 hours and the next 24 hours.
+
+8.3.1
+- Weatherstation selection screen had too many entries to display.
+  Filtered out the Noordzee Platform weatherstation to show the remaining ones
+- Some Buienradar images didn't have the correct aspect ratio
+  (Actual temp./Min-Max temp/ Windforce and min ground temp).
+
+8.3.0
+- implemented native https calls. No need for the cron jobs anymore.
+  cron jobs installed for 8.2.1 can be removed manually.
+  N.B. This versions needs to be installed with ToonStore 1.1.0 or later
+
+8.2.1
+- changed reading http://xml.buienradar.nl/ to a local file /root/buienradar/buienradar.xml
+  because http calls are now redirected to https which is standard not supported by Toon.
+  
+  use the wget method to retrieve the buienradar.xml file as described on
+  https://www.domoticaforum.eu/viewforum.php?f=87
+
+8.2.0
+- simplified station selection screen, can now select from all available weatherstations in the xml file
+
+8.1.0
+- copy of 8.0.10, renumbered to work around a bug in ToonStore
+
+8.0.10
+- restored backwards compatibility with firmware version 3.x
+
+8.0.9
+- expended the 5-days forecast table with 'today' being the last prediction of yesterday for today.
+  this column will be visible from the next day after a restart of Toon 
+
+8.0.8
+- Longitude/Latitude coordinates were not saved after clicking on the map.
+- cosmetic improvements to that same screen to set your location for the rain radar (labels didn't fit)
+- removed C (Celsius) captial from the main Buienradar tile to match the temperature format of the thermostat
+
+8.0.7
+- cosmetic changes in the systray icon, to comply with 4.4 fw style.
+ 
+8.0.6
+- rain prediction data feed URL changed at the buienradar site (for the next 2 hour rain prediction per lat/lon coordinates)
+
+8.0.5
+- actual temperature saved after each update to file:///var/volatile/tmp/actualBuienradarTemp.txt for use in the TemperatureLogger app version 1.2 onwards.
+
+8.0.4
+-cosmetic change: updated screen titles for minimum and maximum temperature in the extra radar screens
+
+8.0.3
+-added the following NL - maps to the big radarimage screen accessible via de systray (button "Extra schermen")
+	minimum temperature today
+	maximum temperature today
+	actual temperature
+	actual windforce and direction
+	minimum ground temperature today (convenient during winter)	
+
+8.0.1
+- corected a bug where the small yellow marker on the big radarimage map was dislocated (bug was introduced in version 8)
+- yellow marker suppressed when viewing muggenradar, pollenradar or BBQ radar on big radarscreen
+
+8.0
+- added Mosquitoradar, BBQ radar and pollenradar to the main Buienradar screen (accessible via the systray icon)
+- added this changelog
+
+7.4.3
+- added code in BuienradarApp.qml to control screen brightness based on sunrise/sunset (code was accidentally removed, originally added in 7.3)
+
+7.4.2
+- added sunrise/sunset times to the detail screen
+- clicking on the weather forecast text box on the details screen now opens a new full screen weather forecast.
+ the text box on the details screen is still scrollable but this was not working very user friendly
+ 
+7.4.1
+- save the selected weather station and lon/lat coordinates for the rain tile and load at startup.
+Files written to the buienradar folder: selectedStation.txt, selectedLongitude.txt and selectedLatitude.txt
+
+7.3
+- fix determineNight() function in Buienradar.js
+- added dormant code in BuienradarApp.qml to control screen brightness based on sunrise/sunset
+
+7.2.1
+- small icons for 5 days forecast and tile in non-dim state now included in the drawables folder and shown correctly.
+
+7.2
+- added 10 minutes markers to make it easier to read the exact timing of predicted rain on tile
+
+7.1
+- when selected weather station data is not available in the XML file (happens frequently just after midnight),
+  the previous data will continue to be shown instead of NaN and blanks.
+
+7.0.2 beta
+- bugfix icon weather station on tile
+- replace "https" by "http" in the xml data feed, all icons in the 5-day forecast are now ok as well
+
+7.0.1 beta
+- complete rewrite of the function updateBuienradar in BuienradarApp.qml.
+  Not reading as XML document anymore but as text file (hopefully more reliable longer term).
+ 
+6.0
+- big Buienradar image enlarged as before
+- added some clarifying text in the lon/lat entry screen
+
+5.0.10
+- added functionality to enter the lon/lat coordinates on the screen behind the 'Regen' tile by clicking anywhere on the map :-)
+  at any zoom level! Calculated by just one formula (functions calcXcoordinate and calcYcoordinate in Buienradar.js)
+  within the Netherlands this functionality works very precise. As you move closer to the poles or equator the deviation is large
+  but that doesn't matter for this application.
+  Between zoom levels 5 (NL) and 13 (neighbourhood) it works very good. Coordinates are rounded to 2 decimals
+  because of the limitation of the rain datafeed by buienradar. On zoomlevel 13 only 4 rounded lat/lon points exists on the map.
+  Zoomlevel 13 is the starting zoomlevel when opening the screen.
+  Zooming further means the whole map is covered by just one rounded coordinate and clicking anywhere will not have an effect.
+  Panning can be done by clicking at the edges of the map, which will become the new center of the next map.
+
+5.0.8beta:
+- after changing the Longitude or Latitude (by clicking on the rainradar tile) a marker is placed on that location on the big Buienradar screen (via de tray icon) as well as the small buienradar image on the detail screen.
+- zoom in and zoom out buttons for the map added to the Lon/Lat entry screen, default starting at the lowest zoom level
+- you can zoom in and out on the google map on the latitude/longitude edit screen is
+- default location set with the longitude/latitude coordinates is now also shown with a yellow marker
+
+5.0.5
+- I made the Y-axis scaling configurable. When clicking on the 'Regen' tile you can change the Y-axis scale as well to enter the maximum #mm of rain. Entering value 0 (zero) will make the graph scaled to the max value of the data feed (rounded to the next .5 mm of rain). This should cover everyone's needs.
+- I had to do some 'defensive programming' when using built-in function like the keyboards.
+   Behaviour of these functions slightly differ between firmware releases.
+   Current version is tested on firmware 3.2 and 3.6 and works fine on both.
+- further cosmetic changes to the tile.
+
+5.0.1 beta
+- added a second tile with 'Regenverwachting' for the next two hours (courtesy of Brainhunt).
+
+4.0.1beta
+- temperature on tile and last update date now using local formats (thanks Marcel)
+- big icon on tile (day/night) now based on sunrise/sunset times from buienradar xml file.
+
+4.0 beta
+- added a big weather icon to the tile (in dim state) based on the famous 'ID' and 'zin' tags and the day of time
+- added a tray icon to the homescreen which starts a separate screen with the big buienradar radar images (animated gifs) :D 
+- added a small version of the radar images to the existing Details screen as well
+- changed the update frequency to 10 minutes (was 15)
+
+3.3
+- Details screen: images are now properly aligned in the 5 days weather forecast columns
+- Fix on StationScreen by Marcel (thanks)
+- A new selected weather station is now saved to "/tmp/selectedStation.txt' and read during startup of qt-gui.
+  when the file doesn't exist, Rotterdam (6344) is used as default.
+- cosmetic update to the tile: relative humidity now represented as 'lv'- luchtvochtigheid.
+
+3.2
+- added 5-days wind forecasts to Detail screen
+- Images will be taken from the weather app folder. Please delete the provincies folder from ../buienradar/drawables manually to save space on your device.
+
+3.0
+- added airpressure (luchtdruk) to tile (thanks Marcel)
+- added chill temperature (gevoelstemperatuur) to tile.
+- added relative humidity (relatieve luchtvochtigheid) to tile
+- reformatted tile (main temp in bold, changed relative positions)
+- details screen weather forecast text is now smaller and scrollable (swipe like on your phone)
+
+2.0.1
+- weather stations now selectable via maps
+- added 'Bf' to wind line on tile (thanks Marcel for the example).
+- 'Zin' text is truncated when too long for the tile (thanks Marcel).
+- added this app to the menu of Toon
+
+1.0.2
+- removed the hardcoded filter on '6344'. 'Location is now used as selection filter as it should (thanks to RomMon)
+- ID and zin tags now properly populated and added to the tile (thanks to HvxL)
+- added the date/time of the latest weatherforecast from your favourite weatherstation to the detailed screen
+- changed the refresh cycle from 15 minutes to 10 minutes to match the XML refresh rate on the buienradar server.
+- as a teaser: I added a button to the Details screen ('Weerstation') to allow selection of your favourite weatherstation 
+  in the next release (you can press it now but nothing happens yet).
+
+1.0
+-initial release dec 2016

@@ -1,0 +1,6 @@
+<svg width="62" height="42">
+  <rect x="0" y="0" rx="5.5" ry="5.5" width="61" height="41" style="stroke:#565656;stroke-width:1" />
+  <rect x="0.5" y="0.5" rx="5" ry="5" width="60" height="40" style="fill:#ea2127;stroke:white;stroke-width:2" />
+<text x="30" y ="30" fill="white" style="font-size:28px;text-align:center;text-anchor:middle;font-weight:normal;font-family:Anwb Eex VL">A2</text> 
+</svg>
+
