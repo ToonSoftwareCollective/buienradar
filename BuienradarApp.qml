@@ -131,12 +131,17 @@ App {
 	property string dp5windkracht
 	property string dp5icoonid
 	property string dp5icoon
+	property bool autoAdjustDimBrightness: true
+	property int autoDimlevelSunUp: 30
+	property int autoDimlevelSunDown: 10
 
 	// user settings from config file
 	property variant buienradarSettingsJson : {
 		'selectedStation': "",
 		'selectedLongitude': "",
-		'selectedLatitude': ""
+		'autoAdjustDimBrightness': "Yes",
+		'autoDimlevelSunUp': 30,
+		'autoDimlevelSunDown': 10
 	}
 
 	FileIO {
@@ -175,10 +180,18 @@ App {
 
 		try {
 			buienradarSettingsJson = JSON.parse(buienradarSettingsFile.read());
-			location = buienradarSettingsJson['selectedStation'];		
-			lon = buienradarSettingsJson['selectedLongitude'];		
-			lat = buienradarSettingsJson['selectedLatitude'];		
-
+			if (buienradarSettingsJson['selectedStation']) location = buienradarSettingsJson['selectedStation'];		
+			if (buienradarSettingsJson['selectedLongitude']) lon = buienradarSettingsJson['selectedLongitude'];		
+			if (buienradarSettingsJson['selectedLatitude']) lat = buienradarSettingsJson['selectedLatitude'];		
+			if (buienradarSettingsJson['autoDimlevelSunUp']) autoDimlevelSunUp = buienradarSettingsJson['autoDimlevelSunUp'];		
+			if (buienradarSettingsJson['autoDimlevelSunDown']) autoDimlevelSunDown = buienradarSettingsJson['autoDimlevelSunDown'];		
+			if (buienradarSettingsJson['autoAdjustDimBrightness']) {
+				 if (buienradarSettingsJson['autoAdjustDimBrightness'] == "Yes") {
+					autoAdjustDimBrightness = true;
+				} else {
+					autoAdjustDimBrightness = false;
+				}		
+			}
 		} catch(e) {
 		}
 	}
@@ -189,7 +202,10 @@ App {
  		var tmpUserSettingsJson = {
 			"selectedStation": location,
 			"selectedLongitude": lon,
-			"selectedLatitude": lat
+			"selectedLatitude": lat,
+			"autoAdjustDimBrightness": autoAdjustDimBrightness ? "Yes" : "No",
+			"autoDimlevelSunUp": autoDimlevelSunUp,
+			"autoDimlevelSunDown": autoDimlevelSunDown
 		}
 
   		var doc3 = new XMLHttpRequest();
@@ -289,12 +305,15 @@ App {
 						i = aNode.indexOf("<zononder>");
 						zononder = aNode.substring(i+10, i+29);
 
-                 				if (BuienradarJS.determineNight (timeStr, zonopkomst, zononder)) 
-                     				screenStateController.backLightValueScreenDimmed = 10;
-                  				else
-                     				screenStateController.backLightValueScreenDimmed = 30;
-                  				screenStateController.notifyChangeOfSettings();
+// auto adjust brightness if configured
 
+						if (autoAdjustDimBrightness) {
+	                 				if (BuienradarJS.determineNight (timeStr, zonopkomst, zononder)) 
+        	             					screenStateController.backLightValueScreenDimmed = autoDimlevelSunDown;
+                	  				else
+                     						screenStateController.backLightValueScreenDimmed = autoDimlevelSunUp;
+                  					screenStateController.notifyChangeOfSettings();
+						}
 					}
 
 

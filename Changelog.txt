@@ -1,3 +1,6 @@
+8.5.4
+- Auto brightness in dim state can be configured via the settingsscreen (based on sunrise and sun down times)
+
 8.5.0
 - fixed an old bug where the big radarscreen was not showing moving radarimages anymore after showing a still radar image like pollenradar.
 - lon/lat coordinates for the rain prediction tile can now be entered via your mobile phone by scanning a qr code (Thanks TheHogNL)

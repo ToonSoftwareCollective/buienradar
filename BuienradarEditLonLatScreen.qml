@@ -29,6 +29,22 @@ Screen {
 		}
 	}
 
+	function saveDimSunDown(text) {
+		if (text) {
+			app.autoDimlevelSunDown = parseInt(text);
+			dimSunDownLabel.inputText = app.autoDimlevelSunDown;
+	   		app.saveSettings();
+		}
+	}
+
+	function saveDimSunUp(text) {
+		if (text) {
+			app.autoDimlevelSunUp = parseInt(text);
+			dimSunUpLabel.inputText = app.autoDimlevelSunUp;
+	   		app.saveSettings();
+		}
+	}
+
 	function saveYaxis(text) {
 		if (text) {
 			app.yaxisScale = (Math.round(parseFloat(text.replace(",", ".")) * 10) / 10);
@@ -43,14 +59,17 @@ Screen {
 	hasCancelButton: true
 	hasSaveButton: false
 
-	screenTitle: "Locatie regenvoorspelling"
+	screenTitle: "Buienradar settings"
 
 	onShown: {
 		addCustomTopRightButton("Opslaan");
 		stationLabel.inputText = BuienradarJS.getlocationName(app.location); 
 		lonLabel.inputText = app.lon;
 		latLabel.inputText = app.lat;
+		dimSunDownLabel.inputText = app.autoDimlevelSunDown;
+		dimSunUpLabel.inputText = app.autoDimlevelSunUp;
 		yaxisLabel.inputText = app.yaxisScale;
+		autoDimToggle.isSwitchedOn = app.autoAdjustDimBrightness ;
 		qrCodeID = Math.random().toString(36).substring(7);
 		qrCode.content = "https://qutility.nl/geolocation/getlocation.php?id="+qrCodeID;
 		qrCodeTimer.running = true;
@@ -222,7 +241,7 @@ Screen {
 		anchors {
 			left: lonLabel.left
 			top: latLabel.bottom
-			topMargin: 50
+			topMargin: 6
 		}
 
 		onClicked: {
@@ -242,7 +261,7 @@ Screen {
 			left: stationLabel.right
 			leftMargin: 6
 			top: latLabel.bottom
-			topMargin: 50
+			topMargin: 6
 		}
 
 		topClickMargin: 3
@@ -271,6 +290,72 @@ Screen {
 	}
 
 	EditTextLabel4421 {
+		id: autoDimLabel
+		width: stationLabel.width
+		height: isNxt ? 44 : 35
+		leftText: "Automatische helderheid dim"
+		leftTextAvailableWidth: stationLabel.width
+		anchors {
+			left: stationLabel.left
+			top: stationLabel.bottom
+			topMargin: 6
+		}
+	}
+
+	OnOffToggle {
+		id: autoDimToggle
+		height: isNxt ? 45 : 36
+		anchors.left: autoDimLabel.right
+		anchors.leftMargin: 10
+		anchors.top: autoDimLabel.top
+		anchors.topMargin: 5
+		leftIsSwitchedOn: false
+		onSelectedChangedByUser: {
+			if (isSwitchedOn) {
+				app.autoAdjustDimBrightness = true
+			} else {
+				app.autoAdjustDimBrightness = false
+			}
+		}
+	}
+
+	EditTextLabel4421 {
+		id: dimSunDownLabel
+		width: isNxt ? 200 : 170
+		height: isNxt ? 45 : 35
+		leftText: "Zon Onder:"
+		leftTextAvailableWidth: isNxt ?  150 : 110
+
+		anchors {
+			left: autoDimToggle.right
+			leftMargin: 10
+			top: autoDimLabel.top
+		}
+
+		onClicked: {
+			qnumKeyboard.open("Helderheid scherm na zonsondergang", dimSunDownLabel.inputText, app.autoDimlevelSunDown, 1 , saveDimSunDown, validateCoordinate);
+		}
+	}
+
+	EditTextLabel4421 {
+		id: dimSunUpLabel
+		width: isNxt ? 200 : 170
+		height: isNxt ? 45 : 35
+		leftText: "Zon Op:"
+		leftTextAvailableWidth: isNxt ?  150 : 110
+
+		anchors {
+			left: dimSunDownLabel.right
+			leftMargin: 10
+			top: autoDimLabel.top
+		}
+
+		onClicked: {
+			qnumKeyboard.open("Helderheid scherm na zonsopgang", dimSunUpLabel.inputText, app.autoDimlevelSunUp, 1 , saveDimSunUp, validateCoordinate);
+		}
+	}
+
+	EditTextLabel4421 {
 		id: yaxisLabel
 		width: lonLabel.width
 		height: isNxt ? 45 : 35
@@ -279,7 +364,7 @@ Screen {
 
 		anchors {
 			left: lonLabel.left
-			top: stationLabel.bottom
+			top: autoDimLabel.bottom
 			topMargin: 50
 		}
 
