@@ -32,7 +32,7 @@ Tile {
 			family: qfont.regular.name
 			pixelSize: isNxt ? 20 : 16
 		}
-		color: colors.tileTextColor
+		color: (typeof dimmableColors !== 'undefined') ? dimmableColors.tileTextColor : colors.tileTextColor
 		text: "Regenverwachting"
 		visible: app.showRain
 	}
@@ -48,7 +48,7 @@ Tile {
 			family: qfont.regular.name
 			pixelSize: isNxt ? 20 : 16
 		}
-		color: colors.tileTextColor
+		color: (typeof dimmableColors !== 'undefined') ? dimmableColors.tileTextColor : colors.tileTextColor
 		text: "Geen neerslag verwacht"
 		visible: !app.showRain
 	}
@@ -89,7 +89,7 @@ Tile {
 			family: qfont.regular.name
 			pixelSize: isNxt ? 20 : 16
 		}
-		color: colors.tileTextColor
+		color: (typeof dimmableColors !== 'undefined') ? dimmableColors.tileTextColor : colors.tileTextColor
 		text: app.yaxisScale ? app.yaxisScale : app.regenMaxValue
 		visible: app.showRain
 	}
@@ -105,7 +105,7 @@ Tile {
 			family: qfont.regular.name
 			pixelSize: isNxt ? 20 : 16
 		}
-		color: colors.tileTextColor
+		color: (typeof dimmableColors !== 'undefined') ? dimmableColors.tileTextColor : colors.tileTextColor
 		text: "mm"
 		visible: app.showRain
 	}
@@ -148,7 +148,7 @@ Tile {
 			family: qfont.regular.name
 			pixelSize: isNxt ? 25 : 20
 		}
-		color: colors.tileTextColor
+		color: (typeof dimmableColors !== 'undefined') ? dimmableColors.tileTextColor : colors.tileTextColor
 		text: app.regenVerwachtingVanaf
 		visible: app.showRain
 	}
@@ -164,7 +164,7 @@ Tile {
 			family: qfont.regular.name
 			pixelSize: isNxt ? 25 : 20
 		}
-		color: colors.tileTextColor
+		color: (typeof dimmableColors !== 'undefined') ? dimmableColors.tileTextColor : colors.tileTextColor
 		text: app.regenVerwachtingMidden
 		visible: app.showRain
 	}
@@ -179,7 +179,7 @@ Tile {
 			family: qfont.regular.name
 			pixelSize: isNxt ? 25 : 20
 		}
-		color: colors.tileTextColor
+		color: (typeof dimmableColors !== 'undefined') ? dimmableColors.tileTextColor : colors.tileTextColor
 		text: app.regenVerwachtingTot
 		visible: app.showRain
 	}

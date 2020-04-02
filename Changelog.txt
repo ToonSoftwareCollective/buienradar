@@ -1,3 +1,6 @@
+8.5.5
+-dimmableColors update
+
 8.5.4
 - Auto brightness in dim state can be configured via the settingsscreen (based on sunrise and sun down times)
 
