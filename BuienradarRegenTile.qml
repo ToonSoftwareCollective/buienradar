@@ -69,7 +69,7 @@ Tile {
 
 			width: parent.width
 			height: parent.height
-			color: colors.graphTileRect
+			color: (typeof dimmableColors !== 'undefined') ? dimmableColors.tileTextColor : colors.graphTileRect
 			yScale: app.yaxisScale ? (height / app.yaxisScale) : (height / app.regenMaxValue)
 			showNaN: false
 			values: app.regenVerwachting
