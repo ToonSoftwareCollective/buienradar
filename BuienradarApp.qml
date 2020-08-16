@@ -289,12 +289,12 @@ App {
 						zichtmeters = aNode.substring(i+13, j);
 						i = aNode.indexOf("<icoonactueel");
 						aNode = aNode.slice(i);
-						i = aNode.indexOf("zin=");
-						j = aNode.indexOf("\"", i+6);
-						icoonzin = aNode.substring(i+5, j);
 						i = aNode.indexOf("ID=");
 						j = aNode.indexOf("\"", i+5);
 						icoonid = aNode.substring(i+4, j);
+						i = aNode.indexOf("zin=");
+						j = aNode.indexOf("\"", i+6);
+						icoonzin = aNode.substring(i+5, j);
 						icoonlink = "qrc:/tsc/" + icoonid + ".png"
 
 
