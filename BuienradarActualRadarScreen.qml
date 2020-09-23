@@ -117,7 +117,7 @@ Screen {
 			stillRadarImage.visible = false;
 			bigRadarImage.visible = true;
 			if (isNxt) {
-				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/radarmapnl/?nt=0&hist=-1&forc=37&step=2&h=600&w=600";
+				app.radarimagesurl = "https://image.buienradar.nl/2.0/image/animation/RadarMapRainNL?extension=gif&width=600&height=600&history=0&forecast=18";
 			} else {
 				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/radarmapnl/?nt=0&hist=-1&forc=37&step=2&h=400&w=400";
 			}

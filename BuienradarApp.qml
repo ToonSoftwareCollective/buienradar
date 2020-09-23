@@ -528,13 +528,15 @@ App {
 			if (xmlhttp.readyState == 4) {
 				if (xmlhttp.status == 200) {
 					var response = xmlhttp.responseText;
-					if (response.length > 0) {
-						regenVerwachtingVanaf = response.slice(4,9);
-						regenVerwachtingMidden = BuienradarJS.addMinutes(regenVerwachtingVanaf, 60);
-						regenVerwachtingTot = BuienradarJS.addMinutes(regenVerwachtingVanaf, 120);
+			                if (response.length > 0) {
+                        			var res = response.replace(/\r/g, "").split(/\n/);
 
-						for (var i = 0; i < response.length/11; i++) {
-							mmRegen =  Math.round(Math.pow(10,((Number(response.slice(i*11,i*11+3))-109)/32))*10)/10;
+			                        regenVerwachtingVanaf = res[0].split("|")[1];
+                        			regenVerwachtingMidden = BuienradarJS.addMinutes(regenVerwachtingVanaf, 60);
+                        			regenVerwachtingTot = BuienradarJS.addMinutes(regenVerwachtingVanaf, 120);
+
+						for (var i = 0; i < res.length -1 ; i++) {
+							mmRegen =  Math.round(Math.pow(10,((Number(res[i].split(/[,.|]/)[0])-109)/32))*10)/10;
 							newArray.push(mmRegen);
 							if (maxValue < mmRegen) {
 								maxValue = mmRegen;
@@ -546,7 +548,6 @@ App {
 							regenMaxValue = Math.round(maxValue + 0.5);
 						}
 						
-
 						if (maxValue > 0) {
 							showRain = true;
 						}

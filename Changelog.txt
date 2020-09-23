@@ -1,3 +1,6 @@
+8.5.8
+- fix for the 'regenverwachting' tile, handling bad input correctly now, thanks glfs91 
+
 8.5.7
 - changed the app to match the new XML layout to display the weather icon correctly
 
