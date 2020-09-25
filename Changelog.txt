@@ -1,5 +1,10 @@
+8.5.9
+- resized the radarimages so that the most southern part of Limburg is visible as well :-)
+- renamed label of the Regenverwachting tile so it doesn't overlap anymore
+- fixed +3h radarimages on a Toon 2 (nobody noticed  it didn't work anymore?)
+
 8.5.8
-- fix for the 'regenverwachting' tile, handling bad input correctly now, thanks glfs91 
+- fix for the 'regenverwachting' tile, handling bad input correctly now, thanks glsf91 
 
 8.5.7
 - changed the app to match the new XML layout to display the weather icon correctly

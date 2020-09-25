@@ -54,7 +54,7 @@ Screen {
 			stillRadarImage.visible = false;
 			bigRadarImage.visible = true;
 			if (isNxt) {
-				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/RadarMapNL?w=600&h=600";
+				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/RadarMapNL?w=500&h=500";
 			} else {
 				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/RadarMapNL?w=400&h=400";
 			}
@@ -75,7 +75,7 @@ Screen {
 			stillRadarImage.visible = false;
 			bigRadarImage.visible = true;
 			if (isNxt) {
-				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/radarmapeu/?nt=0&hist=-1&forc=37&step=1&w=600&h=600";
+				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/radarmapeu/?nt=0&hist=-1&forc=37&step=1&w=500&h=500";
 			} else {
 				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/radarmapeu/?nt=0&hist=-1&forc=37&step=1&w=400&h=400";
 			}
@@ -96,7 +96,7 @@ Screen {
 			stillRadarImage.visible = false;
 			bigRadarImage.visible = true;
 			if (isNxt) {
-				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/radarmapnl/?nt=0&hist=-1&forc=13&step=1&w=600&h=600";
+				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/radarmapnl/?nt=0&hist=-1&forc=13&step=1&w=500&h=500";
 			} else {
 				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/radarmapnl/?nt=0&hist=-1&forc=13&step=1&w=400&h=400";
 			}
@@ -117,7 +117,7 @@ Screen {
 			stillRadarImage.visible = false;
 			bigRadarImage.visible = true;
 			if (isNxt) {
-				app.radarimagesurl = "https://image.buienradar.nl/2.0/image/animation/RadarMapRainNL?extension=gif&width=600&height=600&history=0&forecast=18";
+				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/radarmapnl/?nt=0&hist=-1&forc=37&step=2&h=500&w=500";
 			} else {
 				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/radarmapnl/?nt=0&hist=-1&forc=37&step=2&h=400&w=400";
 			}
@@ -138,7 +138,7 @@ Screen {
 			stillRadarImage.visible = false;
 			bigRadarImage.visible = true;
 			if (isNxt) {
-				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/24hourforecastmapnl/?nt=0&hist=-1&forc=13&step=0&h=600&w=600";
+				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/24hourforecastmapnl/?nt=0&hist=-1&forc=13&step=0&h=500&w=500";
 			} else {
 				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/24hourforecastmapnl/?nt=0&hist=-1&forc=13&step=0&h=400&w=400";
 			}
@@ -159,7 +159,7 @@ Screen {
 			stillRadarImage.visible = false;
 			bigRadarImage.visible = true;
 			if (isNxt) {
-				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/drizzlemapnl/gif/?w=600";
+				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/drizzlemapnl/gif/?w=500";
 			} else {
 				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/drizzlemapnl/gif/?w=400";
 			}
@@ -181,7 +181,7 @@ Screen {
 			stillRadarImage.visible = true;
 			bigRadarImage.visible = false;
 			if (isNxt) {
-				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/mosquitoradarnl/gif/?h=600";
+				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/mosquitoradarnl/gif/?h=500";
 			} else {
 				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/mosquitoradarnl/gif/?h=400";
 			}
@@ -201,7 +201,7 @@ Screen {
 			stillRadarImage.visible = true;
 			bigRadarImage.visible = false;
 			if (isNxt) {
-				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/pollenradarnl/gif/?h=600";
+				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/pollenradarnl/gif/?h=500";
 			} else {
 				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/pollenradarnl/gif/?h=400";
 			}
@@ -222,7 +222,7 @@ Screen {
 			stillRadarImage.visible = true;
 			bigRadarImage.visible = false;
 			if (isNxt) {
-				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/bbqradarnl/gif/?h=600";
+				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/bbqradarnl/gif/?h=500";
 			} else {
 				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/bbqradarnl/gif/?h=400";
 			}
@@ -244,7 +244,7 @@ Screen {
 			stillRadarImage.visible = true;
 			bigRadarImage.visible = false;
 			if (isNxt) {
-				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/weathermapnl/?type=temperature&h=600";
+				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/weathermapnl/?type=temperature&h=500";
 			} else {
 				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/weathermapnl/?type=temperature&h=400";
 			}
@@ -265,7 +265,7 @@ Screen {
 			stillRadarImage.visible = true;
 			bigRadarImage.visible = false;
 			if (isNxt) {
-				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/weathermapnl/?type=mintemperature&h=600";
+				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/weathermapnl/?type=mintemperature&h=500";
 			} else {
 				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/weathermapnl/?type=mintemperature&h=400";
 			}
@@ -287,7 +287,7 @@ Screen {
 			stillRadarImage.visible = true;
 			bigRadarImage.visible = false;
 			if (isNxt) {
-				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/weathermapnl/?type=maxtemperature&h=600";
+				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/weathermapnl/?type=maxtemperature&h=500";
 			} else {
 				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/weathermapnl/?type=maxtemperature&h=400";
 			}
@@ -308,7 +308,7 @@ Screen {
 			stillRadarImage.visible = true;
 			bigRadarImage.visible = false;
 			if (isNxt) {
-				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/weathermapnl/?type=windspeedbft&h=600";
+				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/weathermapnl/?type=windspeedbft&h=500";
 			} else {
 				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/weathermapnl/?type=windspeedbft&h=400";
 			}
@@ -329,7 +329,7 @@ Screen {
 			stillRadarImage.visible = true;
 			bigRadarImage.visible = false;
 			if (isNxt) {
-				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/weathermapnl/?type=mingroundtemperature&h=600";
+				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/weathermapnl/?type=mingroundtemperature&h=500";
 			} else {
 				app.stillimagesurl = "https://api.buienradar.nl/image/1.0/weathermapnl/?type=mingroundtemperature&h=400";
 			}
