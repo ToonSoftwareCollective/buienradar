@@ -84,10 +84,11 @@ Tile {
 			baseline: parent.top
 			baselineOffset: isNxt ? 55 : 45
 			left: parent.left
+			leftMargin: isNxt ? 5 : 4
 		}
 		font {
-			family: qfont.regular.name
-			pixelSize: isNxt ? 20 : 16
+			family: qfont.bold.name
+			pixelSize: isNxt ? 30 : 24
 		}
 		color: (typeof dimmableColors !== 'undefined') ? dimmableColors.tileTextColor : colors.tileTextColor
 		text: app.yaxisScale ? app.yaxisScale : app.regenMaxValue
