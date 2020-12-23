@@ -1,5 +1,5 @@
 8.5.11
-- Rain tile Y-axis font size increased (test)
+- Rain tile Y-axis font size increased
 
 8.5.9
 - resized the radarimages so that the most southern part of Limburg is visible as well :-)
