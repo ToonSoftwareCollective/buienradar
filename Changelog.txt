@@ -1,3 +1,6 @@
+8.5.12
+- option to enter your gps coordinates by scanning the QR code has been removed
+
 8.5.11
 - Rain tile Y-axis font size increased
 

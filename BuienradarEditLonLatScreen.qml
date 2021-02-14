@@ -74,25 +74,6 @@ Screen {
 		qrCode.content = "https://qutility.nl/geolocation/getlocation.php?id="+qrCodeID;
 		qrCodeTimer.running = true;
 	}
-
-	function checkLocation() {
-                var xmlhttp = new XMLHttpRequest();
-                xmlhttp.onreadystatechange=function() {
-                        if (xmlhttp.readyState == 4) {
-                                if (xmlhttp.status == 200) {
-                                        var aNode = xmlhttp.responseText;
-					var nameArr = aNode.split(',');
-					saveLat(nameArr[0]);
-					saveLon(nameArr[1]);
-					qrCodeTimer.running = false;
-					findNearestWeatherStation();
-				}
-			}
-		}
-                xmlhttp.open("GET", "http://qutility.nl/geolocation/toon/"+qrCodeID+".geo", true);
-                xmlhttp.send();
-
-	}
 	
 	function toRad(x) {
     		return x * Math.PI / 180;
@@ -133,7 +114,6 @@ Screen {
 	onCustomButtonClicked: {
 		app.saveSettings();
 		app.updateRegenkans();
-		qrCodeTimer.running = false;
 		hide();
 	}
 
@@ -408,44 +388,4 @@ Screen {
 		}
 		color: colors.rbTitle
 	}
-
-
-    QrCode {
-        id: qrCode
-        anchors {
-            right: yaxisLabel.right
-            top:yaxisLabel.bottom
-	    topMargin:26
-	}
-        width: isNxt ? 125 : 100
-        height: width
-    }
-
-    Text {
-        id: qrCodeText
-        width: isNxt ? 500 : 400
-        wrapMode: Text.WordWrap
-        anchors {
-            left: uitlegLabel.left
-            top: qrCode.top
-        }
-	text: "Scan deze qrcode met je telefoon om je locatie gegevens op te halen."
-	font {
-		family: qfont.semiBold.name
-		pixelSize: isNxt ? 20 : 16
-	}
-	color: colors.rbTitle
-    }
-
-
-        Timer {
-                id: qrCodeTimer
-                interval: 1000
-                triggeredOnStart: false
-                running: false
-                repeat: true
-                onTriggered: checkLocation()
-        }
-
-
 }
