@@ -1,3 +1,6 @@
+8.5.13
+- updated the source URL of the buienradar xml file
+
 8.5.12
 - option to enter your gps coordinates by scanning the QR code has been removed
 

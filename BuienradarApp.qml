@@ -512,7 +512,7 @@ App {
 				}
 			}
 		}
-		xmlhttp.open("GET", "http://xml.buienradar.nl", true);
+		xmlhttp.open("GET", "https://data.buienradar.nl/1.0/feed/xml", true);
 		xmlhttp.send();
 	}
 
