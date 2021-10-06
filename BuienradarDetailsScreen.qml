@@ -232,7 +232,7 @@ Screen {
 
 		interactive: false
 		flow: GridView.TopToBottom
-		cellWidth: isNxt ? 100 : 80
+		cellWidth: isNxt ? 100 : 75
 		cellHeight: backgroundRect2.height
 		height: backgroundRect2.height
 		width: parent.width
