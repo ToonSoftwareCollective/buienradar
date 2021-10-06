@@ -4,7 +4,7 @@ import "buienradar.js" as BuienradarJS
 
 Tile {
 	id: buienradarTile
-	property string tempVal: BuienradarJS.formatTemp(app.temperatuurGC, BuienradarJS.getlocationName(app.location))
+	property string tempVal: (app.indexStation < 0) ? "Even geduld" : BuienradarJS.formatTemp(app.temperatuurGC, app.stationArray[app.indexStation])
 	property string tempWind: BuienradarJS.formatWind(app.windrichting, app.windsnelheidBF)
 	property string tempZin: BuienradarJS.formatZin(app.icoonzin)
 	property string tempLuchtdruk: BuienradarJS.formatLuchtdruk(app.luchtdruk,app.luchtvochtigheid)
@@ -12,7 +12,6 @@ Tile {
 	property string dimTempVal: BuienradarJS.formatDimTemp(app.temperatuurGC)
 
 	property bool dimState: screenStateController.dimmedColors
-
 
 	onClicked: {
 		app.radarimagesSmallurl ="http://toon/";  //resetimage

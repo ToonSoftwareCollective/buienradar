@@ -45,13 +45,6 @@ Screen {
 		}
 	}
 
-	function saveYaxis(text) {
-		if (text) {
-			app.yaxisScale = (Math.round(parseFloat(text.replace(",", ".")) * 10) / 10);
-			yaxisLabel.inputText = app.yaxisScale;
-		}
-	}
-
 	function validateCoordinate(text, isFinalString) {
 		return null;
 	}
@@ -63,16 +56,13 @@ Screen {
 
 	onShown: {
 		addCustomTopRightButton("Opslaan");
-		stationLabel.inputText = BuienradarJS.getlocationName(app.location); 
+		if (app.indexStation > -1) stationLabel.inputText = app.stationArray[app.indexStation]; 
 		lonLabel.inputText = app.lon;
 		latLabel.inputText = app.lat;
 		dimSunDownLabel.inputText = app.autoDimlevelSunDown;
 		dimSunUpLabel.inputText = app.autoDimlevelSunUp;
 		yaxisLabel.inputText = app.yaxisScale;
 		autoDimToggle.isSwitchedOn = app.autoAdjustDimBrightness ;
-		qrCodeID = Math.random().toString(36).substring(7);
-		qrCode.content = "https://qutility.nl/geolocation/getlocation.php?id="+qrCodeID;
-		qrCodeTimer.running = true;
 	}
 	
 	function toRad(x) {
@@ -101,24 +91,21 @@ Screen {
 			distance = haversineDistance(parseFloat(app.lat), parseFloat(app.lon), parseFloat(app.latArray[i]), parseFloat(app.lonArray[i])); 			
 			if (nearestDistance > distance) {
 				nearestDistance = distance;
-				nearestStation = app.stationArray[i];
+				nearestStation = app.locationArray[i];
 			}
 		}
-		app.location = nearestStation.substring(0,4);
+		app.location = nearestStation;
+		app.indexStation = app.locationArray.indexOf(parseInt(app.location))
 		app.saveSettings();
 		app.updateBuienradar();
-		stationLabel.inputText = BuienradarJS.getlocationName(app.location); 
-		qdialog.showDialog(qdialog.SizeLarge, "Buienradar mededeling", "Op basis van de ingevoerde lat/lon coordinaten is het volgende dichtsbijzijnde weerstation geselekteerd:\n\nStation: " + nearestStation + "\nAfstand : " + (Math.round(nearestDistance * 100) / 100) + " km", "Sluiten");
+		stationLabel.inputText = app.stationArray[app.indexStation]; 
+		qdialog.showDialog(qdialog.SizeLarge, "Buienradar mededeling", "Op basis van de ingevoerde lat/lon coordinaten is het volgende dichtsbijzijnde weerstation geselekteerd:\n\nStation: " + app.stationArray[app.indexStation] + "\nAfstand : " + (Math.round(nearestDistance * 100) / 100) + " km", "Sluiten");
 	}
 
 	onCustomButtonClicked: {
 		app.saveSettings();
 		app.updateRegenkans();
 		hide();
-	}
-
-	onHidden: {
-		qrCodeTimer.running = false;
 	}
 
 	Text {

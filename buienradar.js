@@ -21,23 +21,15 @@ function formatScale(maxRegen, yScale) {
     }
 }
 
-function calcXcoordinate(lon, x, zoom) {
-	return  Number(lon) + ((x-150) * (Math.pow(2, (13-zoom)) / 100) / 60);
-}
-
-function calcYcoordinate(lat, y, zoom) {
-	return  Number(lat) + ((150-y)*(Math.pow(2, (13-zoom))/100)/94);
-}
-
 function formatTemp(tempValue, locationName) {
 //adapted to reflect locale settings
-    return locationName + ": " + i18n.number( Number( tempValue ), 1 ) + " °C";
+	if (locationName) return locationName + ": " + i18n.number( Number( tempValue ), 1 ) + " °C";
+	return "Even geduld..."
 }
 
 
 function dateFormat( dateStr ) {
-    return  dateStr.substr( 3, 2 ) + "-" + dateStr.substr( 0, 2 ) + "-" +
-	dateStr.substr( 6, 4 ) + " " + dateStr.substr( 11, 5 );
+    return  dateStr.substring(0, 10) + " " + dateStr.substring(11,16);
 }
 
 
@@ -112,10 +104,6 @@ function lineTemp(tempValue) {
 }
 
 
-function lineWindrichting(richting) {
-	return "Windrichting:     " + richting;
-}
-
 function lineZonOpOnder(zonop, zononder) {
 	return zonop.substr(11,5) + " / " + zononder.substr(11,5);
 }
@@ -145,60 +133,6 @@ function lineWindstotenMS(ws) {
 	return "Windstoten:       " + ws + " m/s";
 }
 
-
-function getlocationName(locid) {
-    switch (locid) {
-    case "6391" : return "Arcen";
-    case "6275" : return "Arnhem";
-    case "6249" : return "Berkhout";
-    case "6308" : return "Cadzand";
-    case "6260" : return "De Bilt";
-    case "6235" : return "Den Helder";
-    case "6370" : return "Eindhoven";
-    case "6377" : return "Ell";
-    case "6321" : return "Euro platform";	
-    case "6350" : return "Gilze Rijen";
-    case "6283" : return "Groenlo";
-    case "6280" : return "Groningen";
-    case "6315" : return "Hansweert";
-    case "6278" : return "Heino";
-    case "6356" : return "Herwijnen";
-    case "6330" : return "Hoek v Holland";
-    case "6279" : return "Hoogeveen";
-    case "6251" : return "Terschelling";
-    case "6258" : return "Houtribdijk";
-    case "6285" : return "Schiermonnikoog";
-    case "6209" : return "IJmond";
-    case "6225" : return "IJmuiden";
-    case "6277" : return "Lauwersoog";
-    case "6320" : return "Goeree";
-    case "6270" : return "Leeuwarden";
-    case "6269" : return "Lelystad";
-    case "6348" : return "Lopik-Cabauw";
-    case "6380" : return "Maastricht";
-    case "6273" : return "Marknesse";
-    case "6286" : return "Nieuw Beerta";
-    case "6312" : return "Oosterschelde";
-    case "6344" : return "Rotterdam";
-    case "6316" : return "Schaar";
-    case "6240" : return "Schiphol";
-    case "6324" : return "Stavenisse";
-    case "6267" : return "Stavoren";
-    case "6331" : return "Tholen";
-    case "6290" : return "Twente";
-    case "6313" : return "Vlakte ad Raan";
-    case "6242" : return "Vlieland";
-    case "6310" : return "Vlissingen";
-    case "6375" : return "Volkel";
-    case "6215" : return "Voorschoten";
-    case "6319" : return "Westdorpe";
-    case "6248" : return "Wijdenes";
-    case "6257" : return "Wijk aan Zee";
-    case "6340" : return "Woensdrecht";
-    default: break;
-    }
-    return "";
-}
 
 /**
 * @brief Calculate a filename to choose weather icons, distinquishing day and night icons. If later than 16:00 local time a night icon will be chosen.

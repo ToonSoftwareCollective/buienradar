@@ -19,7 +19,8 @@ Rectangle
 		fontPixelSize: isNxt ? 18 : 15
 
 		onClicked: {
-			app.location = text.substring(0,4);
+			app.location = app.locationArray[index];
+			app.indexStation = index;
 			app.saveSettings();
 			app.updateBuienradar();
 			hide();

@@ -86,7 +86,7 @@ Screen {
 	StandardButton {
 		id: btnBuienradar2
 		width: isNxt ? 45 : 40
-		text: "+1u"
+		text: "+8u"
 		anchors {
 			baseline: parent.top
 			left: btnBuienradarEU.right
@@ -96,11 +96,11 @@ Screen {
 			stillRadarImage.visible = false;
 			bigRadarImage.visible = true;
 			if (isNxt) {
-				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/radarmapnl/?nt=0&hist=-1&forc=13&step=1&w=500&h=500";
+				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/radarmapnl/?nt=0&hist=-1&forc=97&step=7&h=500&w=500";
 			} else {
-				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/radarmapnl/?nt=0&hist=-1&forc=13&step=1&w=400&h=400";
+				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/radarmapnl/?nt=0&hist=-1&forc=97&step=7&w=400&h=400";
 			}
-			setTitle("Actuele Buienradar 1 uur vooruit");
+			setTitle("Actuele Buienradar 8 uur vooruit");
 		}
 	}
 

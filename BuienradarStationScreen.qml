@@ -10,11 +10,9 @@ Screen {
 
 		stationFilterModel.clear();
 		for (var i = 0; i < app.stationArray.length; i++) {
-			stationFilterModel.append({name: app.stationArray[i]});
+			if (app.stationArray[i].substring (0,11) !== "Zeeplatform") stationFilterModel.append({name: app.stationArray[i]});
 		}
-
 	}
-
 
 	ControlGroup {
 		id: stationFilterGroup
