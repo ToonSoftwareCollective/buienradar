@@ -232,6 +232,10 @@ App {
 							  'zonoponder': BuienradarJS.lineZonOpOnder(brJson['actual']['sunrise'], brJson['actual']['sunset'])});
 						actualweather = tmpActual;
 
+				
+						zonopkomst = brJson['actual']['sunrise']
+						zononder = brJson['actual']['sunset']
+
 							// auto adjust brightness if configured (on Toon 1 only)
 
 						if (autoAdjustDimBrightness) {
