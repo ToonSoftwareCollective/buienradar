@@ -1,3 +1,6 @@
+9.0.3
+- added Tile with sunrise/sunset times of your location
+
 9.0.2
 - complete rewrite of the main program. Now using the new JSON data feed from buienradar instead of the XML file.
   Much less code needed compared to the earlier versions

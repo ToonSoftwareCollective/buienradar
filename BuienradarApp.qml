@@ -23,6 +23,7 @@ App {
 
 	property url tileUrl : "BuienradarTile.qml"
 	property url tileUrlRegen : "BuienradarRegenTile.qml"
+	property url tileSunrise : "BuienradarSunriseTile.qml"
 	property url thumbnailIcon: "qrc:/tsc/buienradar.png"
 	property BuienradarDetailsScreen buienradarDetailsScreen
 	property BuienradarStationScreen buienradarStationScreen
@@ -107,6 +108,7 @@ App {
 	function init() {
 		registry.registerWidget("tile", tileUrl, this, null, {thumbLabel: qsTr("Buienradar"), thumbIcon: thumbnailIcon, thumbCategory: "general", thumbWeight: 30, baseTileWeight: 10, thumbIconVAlignment: "center"});
 		registry.registerWidget("tile", tileUrlRegen, this, null, {thumbLabel: "Regenverw.", thumbIcon: thumbnailIcon, thumbCategory: "general", thumbWeight: 30, baseTileWeight: 10, thumbIconVAlignment: "center"});
+		registry.registerWidget("tile", tileSunrise, this, null, {thumbLabel: "Zon op/onder", thumbIcon: thumbnailIcon, thumbCategory: "general", thumbWeight: 30, baseTileWeight: 10, thumbIconVAlignment: "center"});
 		registry.registerWidget("screen", p.buienradarDetailsScreenUrl, this, "buienradarDetailsScreen");
 		registry.registerWidget("screen", p.buienradarStationScreenUrl, this, "buienradarStationScreen");
 		registry.registerWidget("screen", p.buienradarActualRadarScreenUrl, this, "buienradarActualRadarScreen");
