@@ -1,3 +1,6 @@
+9.0.4
+- used 'gevoelstemperatuur' as reported by Buienradar instead of the internal calculated value
+
 9.0.3
 - added Tile with sunrise/sunset times of your location
 

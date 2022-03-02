@@ -69,30 +69,6 @@ function determineNight (tijdnu, zonop, zononder) {
 }
 
 
-function formatGevoelstemp( temperature, windSpeed, humidity ) {
-   
-    if ( isNaN( temperature ) )
-	//	return temperature;
-	return "--"; // return dashes. NaN is a bit strange on screen. Half the world has no clue what NaN means
-    var result;
-    if (windSpeed > 1.2) {
-	if (temperature <= 10.0) {
-	    var windVar = (3.6 * windSpeed);
-	    result = (13.12 + (0.6215 * temperature) - (11.37 * Math.pow(windVar, 0.16)) + (0.3965 * temperature * Math.pow(windVar, 0.16)));
-	} else	{
-	    var num = (17.27 * temperature);
-	    var den = (237.7 + Number(temperature)); // Need to cast temperature explicitly, overloaded methods for "+" are quite buggy, apparently. 
-
-	    var vapourPressure =  (humidity / 100.0) * 6.105 * Math.exp( num/den );
-	    result = ( Number(temperature) + (0.33 * vapourPressure) - (0.70 * windSpeed) - 4.0 );
-	}
-    } else {
-	result = temperature;
-    }
-   return "gevoelstemp: " + i18n.number( (Math.round(result * 2) / 2), 1) + " °C";
-
-}
-
 	
 function formatLuchtdruk(ld, humidity) {
 	return i18n.number(ld, 0, i18n.general_rounding, 1) + " hPa; lv: " + humidity + " %";

@@ -8,7 +8,6 @@ Tile {
 	property string tempWind: BuienradarJS.formatWind(app.windrichting, app.windsnelheidBF)
 	property string tempZin: BuienradarJS.formatZin(app.icoonzin)
 	property string tempLuchtdruk: BuienradarJS.formatLuchtdruk(app.luchtdruk,app.luchtvochtigheid)
-	property string tempGevoelstemp: BuienradarJS.formatGevoelstemp(app.temperatuurGC, app.windsnelheidMS, app.luchtvochtigheid)
 	property string dimTempVal: BuienradarJS.formatDimTemp(app.temperatuurGC)
 
 	property bool dimState: screenStateController.dimmedColors
@@ -85,7 +84,7 @@ Tile {
 
 	Text {                                                                                 
                 id: buienradarTileGevoelstempText4
-                text: tempGevoelstemp
+                text: "gevoelstemperatuur: " + i18n.number( Number( app.gevoelstemperatuur), 1 ) + "°"
                 anchors {
                         baseline: parent.top
                         baselineOffset: isNxt ? 60 : 50

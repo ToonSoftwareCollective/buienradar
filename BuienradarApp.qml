@@ -49,6 +49,7 @@ App {
 	property variant brJson : {}
 
 	property string temperatuurGC
+	property string gevoelstemperatuur
 	property string windsnelheidBF
 	property string windsnelheidMS
 	property string windrichting
@@ -206,6 +207,7 @@ App {
 						if (brJson['actual']['stationmeasurements'][indexStation]['airpressure']) luchtdruk = brJson['actual']['stationmeasurements'][indexStation]['airpressure'];
 						if (brJson['actual']['stationmeasurements'][indexStation]['visibility']) zichtmeters = brJson['actual']['stationmeasurements'][indexStation]['visibility'];
 						if (brJson['actual']['stationmeasurements'][indexStation]['temperature']) temperatuurGC = brJson['actual']['stationmeasurements'][indexStation]['temperature'];
+						if (brJson['actual']['stationmeasurements'][indexStation]['feeltemperature']) gevoelstemperatuur = brJson['actual']['stationmeasurements'][indexStation]['feeltemperature'];
 						if (brJson['actual']['stationmeasurements'][indexStation]['humidity']) luchtvochtigheid = brJson['actual']['stationmeasurements'][indexStation]['humidity'];
 
 						icoonzin = brJson['actual']['stationmeasurements'][indexStation]['weatherdescription'];
