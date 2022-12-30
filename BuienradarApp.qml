@@ -330,66 +330,65 @@ App {
 		var newArray = [];
 		var mmRegen = 0;
 		var maxValue = 0;
-		regenMaxValue = 2;
+		regenMaxValue = 0;
+		var tmpNewDate = new Date();
+		var now = new Date();
+		var startForecasts = 0;
+		var forecastCounter = 0;
 		showRain = false;
 
 		xmlhttp.onreadystatechange=function() {
 			if (xmlhttp.readyState == 4) {
 				if (xmlhttp.status == 200) {
+
 					var response = xmlhttp.responseText;
 			                if (response.length > 0) {
-                        			var res = response.replace(/\r/g, "").split(/\n/);
 
-			                        regenVerwachtingVanaf = "00:00";
+						var brJson = JSON.parse(xmlhttp.responseText);
+							// find start of actual forecast
 
-						//Cut graph (data less than 2 hours old) or do not show graph if data is more then 2 hours old
-						var dateNow = new Date();
-						var hoursNow = dateNow.getHours();
-						var minutesNow = dateNow.getMinutes();
-						var diffMinutes = ((hoursNow * 60) + minutesNow) - ((res[0].substring(4,6) * 60) + (res[0].substring(7,9) * 1));
-
-						if (diffMinutes < 120) { //some data to show, not too outdated
-						
-							skipColumns = 0;
-							if (diffMinutes > 5) skipColumns = Math.round(diffMinutes / 5);
-
-							for (var i = 0; i < res.length -1 ; i++) {
-								if ((i+1) > skipColumns) {
-			                       				if (regenVerwachtingVanaf == "00:00") regenVerwachtingVanaf = res[i].split("|")[1];
-									mmRegen =  Math.round(Math.pow(10,((Number(res[i].split(/[,.|]/)[0])-109)/32))*10)/10;
-									newArray.push(mmRegen);
-									if (maxValue < mmRegen) {
-										maxValue = mmRegen;
-									}
-								}
-							}
-							for (var i = 0; i < res.length -1 ; i++) {  // add empty columns
-								if ((i) < skipColumns) {
-									mmRegen = 0;
-									console.log("Buienlogmm:"+ mmRegen);
-									newArray.push(mmRegen);
-								}
-							}
-              			       			regenVerwachtingMidden = BuienradarJS.addMinutes(regenVerwachtingVanaf, 60);
-              		          			regenVerwachtingTot = BuienradarJS.addMinutes(regenVerwachtingVanaf, 120);
-
-							regenVerwachting = newArray;
-							
-							if (maxValue > regenMaxValue) {
-								regenMaxValue = Math.round(maxValue + 0.5);
-							}
-						
-							if (maxValue > 0) {
-								showRain = true;
+						for (var i = 0; i < brJson['forecasts'].length ; i++) {
+							tmpNewDate = new Date(brJson['forecasts'][i]['datetime']);
+							if (now < tmpNewDate) {
+								startForecasts = i;
+								break;
 							}
 						}
+
+      			       			regenVerwachtingVanaf = brJson['forecasts'][startForecasts]['datetime'].substring(11,16);
+ 
+							// fill array with the next 24 values
+
+						for (var i = startForecasts; i < brJson['forecasts'].length ; i++) {
+							mmRegen =  brJson['forecasts'][i]['precipation'];
+							newArray.push(mmRegen);
+							if (mmRegen > 0) showRain = true;
+							if (mmRegen > maxValue) maxValue = mmRegen;
+							forecastCounter = forecastCounter + 1;
+							if (forecastCounter == 24) break;
+						}
+
+							// fill remaining slots , just in case we didn't had 24 datapoints
+
+						if (forecastCounter < 24) {
+
+							for (var i = forecastCounter; i < 24 ; i++) {  // add empty columns
+								mmRegen = 0;
+								newArray.push(mmRegen);
+							}
+						}
+
+       			       			regenVerwachtingMidden = BuienradarJS.addMinutes(regenVerwachtingVanaf, 60);
+       		          			regenVerwachtingTot = BuienradarJS.addMinutes(regenVerwachtingVanaf, 120);
+						regenVerwachting = newArray;
+							
+						regenMaxValue = Math.round(maxValue + 0.5); 
 					}
 				}
 			}
 		}
 
-		xmlhttp.open("GET", "http://gadgets.buienradar.nl/data/raintext?lat="+lat+"&lon="+lon, true);
-//		xmlhttp.open("GET", "file:///root/raintext.txt", true);
+		xmlhttp.open("GET", "https://graphdata.buienradar.nl/2.0/forecast/geo/RainHistoryForecast?lat="+lat+"&lon="+lon, true);
 		xmlhttp.send();
 	}
 
