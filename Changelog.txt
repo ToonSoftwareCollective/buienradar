@@ -1,3 +1,9 @@
+9.0.7
+- regenverwachting tegel gebruikt nu dezelfde dataset als de buienradar website
+
+9.0.5
+- laat oude data niet zien op de regenverwachting tegel
+
 9.0.4
 - used 'gevoelstemperatuur' as reported by Buienradar instead of the internal calculated value
 
