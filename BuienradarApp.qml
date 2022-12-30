@@ -47,7 +47,6 @@ App {
 	property variant latArray : []
 	property variant lonArray : []
 	property variant brJson : {}
-	property int skipColumns
 
 	property string temperatuurGC
 	property string gevoelstemperatuur

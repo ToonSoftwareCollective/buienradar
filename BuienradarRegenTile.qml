@@ -167,7 +167,7 @@ Tile {
 		}
 		color: (typeof dimmableColors !== 'undefined') ? dimmableColors.tileTextColor : colors.tileTextColor
 		text: app.regenVerwachtingMidden
-		visible: app.showRain && (app.skipColumns < 12)
+		visible: app.showRain
 	}
 	Text {
 		id: rightTimeText
@@ -182,7 +182,7 @@ Tile {
 		}
 		color: (typeof dimmableColors !== 'undefined') ? dimmableColors.tileTextColor : colors.tileTextColor
 		text: app.regenVerwachtingTot
-		visible: app.showRain && (app.skipColumns < 1)
+		visible: app.showRain
 	}
 
 	/// horizontal Repeater representing 10 minutes markers
