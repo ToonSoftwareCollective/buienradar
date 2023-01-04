@@ -1,3 +1,7 @@
+9.0.8
+- removed auto-dim settings of the screen based on sunrise/sunset times.
+  this caused issues sometimes on newer firmwares
+
 9.0.7
 - regenverwachting tegel gebruikt nu dezelfde dataset als de buienradar website
 

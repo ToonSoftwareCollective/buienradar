@@ -8,18 +8,11 @@ App {
 	id: buienradarApp
 	objectName: "BuienradarApp"
 
-	// These are the URL's for the QML resources from which our widgets will be instantiated.
-	// By making them a URL type property they will automatically be converted to full paths,
-	// preventing problems when passing them around to code that comes from a different path.
-
-	//Edit these settings:
 		// default weerstation after cold boot if no saved location exists	
 	property string location : "6344";
 		// default coordinates voor 2-uurs regenradardata if no saved location exists
 	property string lat : "52.21"
 	property string lon : "4.53"
-	property real yaxisScale : 0
-	//Stop editing here!	
 
 	property url tileUrl : "BuienradarTile.qml"
 	property url tileUrlRegen : "BuienradarRegenTile.qml"
@@ -75,18 +68,8 @@ App {
 	property variant actualweather: []
 	property string firstdayForecast: "  "
 
-	property bool autoAdjustDimBrightness: true
-	property int autoDimlevelSunUp: 30
-	property int autoDimlevelSunDown: 10
-
 	// user settings from config file
-	property variant buienradarSettingsJson : {
-		'selectedStation': "",
-		'selectedLongitude': "",
-		'autoAdjustDimBrightness': "Yes",
-		'autoDimlevelSunUp': 30,
-		'autoDimlevelSunDown': 10
-	}
+	property variant buienradarSettingsJson : {}
 
 	FileIO {
 		id: buienradarSettingsFile
@@ -128,15 +111,6 @@ App {
 			if (buienradarSettingsJson['selectedStation']) location = buienradarSettingsJson['selectedStation'];		
 			if (buienradarSettingsJson['selectedLongitude']) lon = buienradarSettingsJson['selectedLongitude'];		
 			if (buienradarSettingsJson['selectedLatitude']) lat = buienradarSettingsJson['selectedLatitude'];		
-			if (buienradarSettingsJson['autoDimlevelSunUp']) autoDimlevelSunUp = buienradarSettingsJson['autoDimlevelSunUp'];		
-			if (buienradarSettingsJson['autoDimlevelSunDown']) autoDimlevelSunDown = buienradarSettingsJson['autoDimlevelSunDown'];		
-			if (buienradarSettingsJson['autoAdjustDimBrightness']) {
-				 if (buienradarSettingsJson['autoAdjustDimBrightness'] == "Yes") {
-					autoAdjustDimBrightness = true;
-				} else {
-					autoAdjustDimBrightness = false;
-				}		
-			}
 		} catch(e) {
 		}
 	}
@@ -147,10 +121,7 @@ App {
  		var tmpUserSettingsJson = {
 			"selectedStation": location,
 			"selectedLongitude": lon,
-			"selectedLatitude": lat,
-			"autoAdjustDimBrightness": autoAdjustDimBrightness ? "Yes" : "No",
-			"autoDimlevelSunUp": autoDimlevelSunUp,
-			"autoDimlevelSunDown": autoDimlevelSunDown
+			"selectedLatitude": lat
 		}
 
   		var doc3 = new XMLHttpRequest();
@@ -240,15 +211,6 @@ App {
 						zonopkomst = brJson['actual']['sunrise']
 						zononder = brJson['actual']['sunset']
 
-							// auto adjust brightness if configured (on Toon 1 only)
-
-						if (autoAdjustDimBrightness) {
-	                 				if (BuienradarJS.determineNight (timeStr, zonopkomst, zononder)) 
-        	             					screenStateController.backLightValueScreenDimmed = autoDimlevelSunDown;
-                	  				else
-                     						screenStateController.backLightValueScreenDimmed = autoDimlevelSunUp;
-                  					screenStateController.notifyChangeOfSettings();
-						}
 					}
 
 
