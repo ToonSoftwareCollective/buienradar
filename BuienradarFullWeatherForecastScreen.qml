@@ -21,7 +21,7 @@ Screen {
 	            id: flickArea
 	             anchors.fill: parent
 	             contentWidth: backgroundRect.width;
-			contentHeight: backgroundRect.height
+		     contentHeight: forecastText.height + 100
 	             flickableDirection: Flickable.VerticalFlick
 	             clip: true
 

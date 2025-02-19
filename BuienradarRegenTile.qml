@@ -10,9 +10,9 @@ Tile {
 	onClicked: {
 		app.radarimagesurl ="http://toon/";  //resetimage
 		if (isNxt) {
-			app.radarimagesurl = "https://api.buienradar.nl/image/1.0/RadarMapNL?w=600&h=600";
+			app.radarimagesurl = "https://api.buienradar.nl/image/1.0/RadarMapNL?width=600&height=600";
 		} else {
-			app.radarimagesurl = "https://api.buienradar.nl/image/1.0/RadarMapNL?w=400&h=400";
+			app.radarimagesurl = "https://api.buienradar.nl/image/1.0/RadarMapNL?width=400&height=400";
 		}
 
 		if (app.buienradarActualRadarScreen) {
