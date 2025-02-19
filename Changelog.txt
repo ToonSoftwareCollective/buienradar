@@ -1,3 +1,7 @@
+9.0.9
+- fixed scrolling behaviour on big weatherforecast text screen
+- small radarmap on forecast details screen showing properly again (api backend change)
+
 9.0.8
 - removed auto-dim brightness settings of the screen based on sunrise/sunset times.
   this caused issues sometimes on newer firmwares
