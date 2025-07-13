@@ -66,9 +66,9 @@ Screen {
 			stillRadarImage.visible = false;
 			bigRadarImage.visible = true;
 			if (isNxt) {
-				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/RadarMapNL?w=500&h=500";
+				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/RadarMapNL?width=600&height=600";
 			} else {
-				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/RadarMapNL?w=400&h=400";
+				app.radarimagesurl = "https://api.buienradar.nl/image/1.0/RadarMapNL?width=400&height=400";
 			}
 			setTitle("Actuele Buienradar");
 		}
