@@ -195,7 +195,7 @@ App {
 
 						if (brJson['Actual']['WeatherStationMeasurements'][indexStation]['Windspeed']) windsnelheidMS = brJson['Actual']['WeatherStationMeasurements'][indexStation]['Windspeed'];
 						if (brJson['Actual']['WeatherStationMeasurements'][indexStation]['Windspeed']) windsnelheidBF = msToBeaufort(Number(brJson['Actual']['WeatherStationMeasurements'][indexStation]['Windspeed']));
-						if (brJson['Actual']['WeatherStationMeasurements'][indexStation]['WindDirection']) windrichting = degreesToCardinal(Number(brJson['Actual']['WeatherStationMeasurements'][indexStation]['WindDirection']));
+						if (brJson['Actual']['WeatherStationMeasurements'][indexStation]['WindDirection']) windrichting = degreesToCardinal(Number(brJson['Actual']['WeatherStationMeasurements'][indexStation]['WindDirectionDegrees']));
 						if (brJson['Actual']['WeatherStationMeasurements'][indexStation]['AirPressure']) luchtdruk = brJson['Actual']['WeatherStationMeasurements'][indexStation]['AirPressure'];
 						if (brJson['Actual']['WeatherStationMeasurements'][indexStation]['Visibility']) zichtmeters = brJson['Actual']['WeatherStationMeasurements'][indexStation]['Visibility'];
 						if (brJson['Actual']['WeatherStationMeasurements'][indexStation]['Temperature']) temperatuurGC = brJson['Actual']['WeatherStationMeasurements'][indexStation]['Temperature'];
