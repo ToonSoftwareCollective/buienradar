@@ -129,6 +129,27 @@ App {
    		doc3.send(JSON.stringify(tmpUserSettingsJson ));
 	}
 
+	function degreesToCardinal(degree){   //convert winddirection in degrees to cardinal
+
+   		if (degree>337.5) return 'N';
+   		if (degree>292.5) return 'NW';
+   		if (degree>247.5) return 'W';
+    		if (degree>202.5) return 'ZW';
+    		if (degree>157.5) return 'Z';
+    		if (degree>122.5) return 'ZO';
+    		if (degree>67.5) return 'O';
+    		if (degree>22.5){return 'NO';}
+    		return 'N';
+	}
+
+	function msToBeaufort(mps) {  // convert windspeed in m/s to Beaufort scale
+      		var scale = [0.3, 1.5, 3.3, 5.5, 7.9, 10.7, 13.8, 17.1, 20.7, 24.4, 28.4, 32.6];
+      		for (var i = 0; i < scale.length; i++) {
+       			 if (mps < scale[i]) return i;
+      		}
+      		return 12;
+    	}
+
 	function updateBuienradar() {
 		
   		var weekday = new Array(7);
@@ -153,12 +174,12 @@ App {
 
 						// if not done already first fill array with available weatherstations
 
-					for (var i=0; i < brJson['actual']['stationmeasurements'].length; i++) {
-						stationArray = BuienradarJS.addStationName(stationArray, i, brJson['actual']['stationmeasurements'][i]['stationname'].slice (-1 * (brJson['actual']['stationmeasurements'][i]['stationname'].length - 12)));
-						locationArray = BuienradarJS.addStationName(locationArray, i, brJson['actual']['stationmeasurements'][i]['stationid']);
-						latArray = BuienradarJS.addStationName(latArray, i, brJson['actual']['stationmeasurements'][i]['lat']);
-						lonArray = BuienradarJS.addStationName(lonArray, i, brJson['actual']['stationmeasurements'][i]['lon']);
-						if (location == brJson['actual']['stationmeasurements'][i]['stationid']) indexStation = i;
+					for (var i=0; i < brJson['Actual']['WeatherStationMeasurements'].length; i++) {
+						stationArray = BuienradarJS.addStationName(stationArray, i, brJson['Actual']['WeatherStationMeasurements'][i]['StationName'].slice (-1 * (brJson['Actual']['WeatherStationMeasurements'][i]['StationName'].length - 12)));
+						locationArray = BuienradarJS.addStationName(locationArray, i, brJson['Actual']['WeatherStationMeasurements'][i]['StationId']);
+						latArray = BuienradarJS.addStationName(latArray, i, brJson['Actual']['WeatherStationMeasurements'][i]['latitude']);
+						lonArray = BuienradarJS.addStationName(lonArray, i, brJson['Actual']['WeatherStationMeasurements'][i]['longitude']);
+						if (location == brJson['Actual']['WeatherStationMeasurements'][i]['StationId']) indexStation = i;
 					}
 
 						// read specific selected location weather data
@@ -170,19 +191,19 @@ App {
 
    						var doc2 = new XMLHttpRequest();
 						doc2.open("PUT", "file:///var/volatile/tmp/actualBuienradarTemp.txt");
-   						doc2.send(brJson['actual']['stationmeasurements'][indexStation]['temperature'] + ":" + brJson['actual']['stationmeasurements'][indexStation]['timestamp']);
+   						doc2.send(brJson['Actual']['WeatherStationMeasurements'][indexStation]['temperature'] + ":" + brJson['Actual']['WeatherStationMeasurements'][indexStation]['Timestamp']);
 
-						if (brJson['actual']['stationmeasurements'][indexStation]['windspeed']) windsnelheidMS = brJson['actual']['stationmeasurements'][indexStation]['windspeed'];
-						if (brJson['actual']['stationmeasurements'][indexStation]['windspeedBft']) windsnelheidBF = brJson['actual']['stationmeasurements'][indexStation]['windspeedBft'];
-						if (brJson['actual']['stationmeasurements'][indexStation]['winddirection']) windrichting = brJson['actual']['stationmeasurements'][indexStation]['winddirection'].toUpperCase();
-						if (brJson['actual']['stationmeasurements'][indexStation]['airpressure']) luchtdruk = brJson['actual']['stationmeasurements'][indexStation]['airpressure'];
-						if (brJson['actual']['stationmeasurements'][indexStation]['visibility']) zichtmeters = brJson['actual']['stationmeasurements'][indexStation]['visibility'];
-						if (brJson['actual']['stationmeasurements'][indexStation]['temperature']) temperatuurGC = brJson['actual']['stationmeasurements'][indexStation]['temperature'];
-						if (brJson['actual']['stationmeasurements'][indexStation]['feeltemperature']) gevoelstemperatuur = brJson['actual']['stationmeasurements'][indexStation]['feeltemperature'];
-						if (brJson['actual']['stationmeasurements'][indexStation]['humidity']) luchtvochtigheid = brJson['actual']['stationmeasurements'][indexStation]['humidity'];
+						if (brJson['Actual']['WeatherStationMeasurements'][indexStation]['Windspeed']) windsnelheidMS = brJson['Actual']['WeatherStationMeasurements'][indexStation]['Windspeed'];
+						if (brJson['Actual']['WeatherStationMeasurements'][indexStation]['Windspeed']) windsnelheidBF = msToBeaufort(Number(brJson['Actual']['WeatherStationMeasurements'][indexStation]['Windspeed']));
+						if (brJson['Actual']['WeatherStationMeasurements'][indexStation]['WindDirection']) windrichting = degreesToCardinal(Number(brJson['Actual']['WeatherStationMeasurements'][indexStation]['WindDirection']));
+						if (brJson['Actual']['WeatherStationMeasurements'][indexStation]['AirPressure']) luchtdruk = brJson['Actual']['WeatherStationMeasurements'][indexStation]['AirPressure'];
+						if (brJson['Actual']['WeatherStationMeasurements'][indexStation]['Visibility']) zichtmeters = brJson['Actual']['WeatherStationMeasurements'][indexStation]['Visibility'];
+						if (brJson['Actual']['WeatherStationMeasurements'][indexStation]['Temperature']) temperatuurGC = brJson['Actual']['WeatherStationMeasurements'][indexStation]['Temperature'];
+						if (brJson['Actual']['WeatherStationMeasurements'][indexStation]['FeelTemperature']) gevoelstemperatuur = brJson['Actual']['WeatherStationMeasurements'][indexStation]['FeelTemperature'];
+						if (brJson['Actual']['WeatherStationMeasurements'][indexStation]['Humidity']) luchtvochtigheid = brJson['Actual']['WeatherStationMeasurements'][indexStation]['Humidity'];
 
-						icoonzin = brJson['actual']['stationmeasurements'][indexStation]['weatherdescription'];
-						var tmpUrl = brJson['actual']['stationmeasurements'][indexStation]['iconurl'].split("/");
+						icoonzin = brJson['Actual']['WeatherStationMeasurements'][indexStation]['WeatherDescription'];
+						var tmpUrl = brJson['Actual']['WeatherStationMeasurements'][indexStation]['IconUrl'].split("/");
 						icoonid = tmpUrl[tmpUrl.length - 1].substring(0, tmpUrl[tmpUrl.length - 1].length - 4);
 						icoonlink = "qrc:/tsc/" + icoonid + ".png";
 
@@ -197,26 +218,26 @@ App {
 							  'luchtdruk': 'Luchtdruk:',
 							  'zicht': 'Zicht:',
 							  'zonoponder': 'Zon op\/onder'});
-						tmpActual.push({'location': BuienradarJS.dateFormat(brJson['actual']['stationmeasurements'][indexStation]['timestamp']),
+						tmpActual.push({'location': BuienradarJS.dateFormat(brJson['Actual']['WeatherStationMeasurements'][indexStation]['Timestamp']),
 							  'temperature': temperatuurGC,
 							  'windrichting': windrichting,
 							  'windsnelheid': windsnelheidBF,
 							  'luchtvochtigheid': luchtvochtigheid,
 							  'luchtdruk': luchtdruk,
 							  'zicht': zichtmeters,
-							  'zonoponder': BuienradarJS.lineZonOpOnder(brJson['actual']['sunrise'], brJson['actual']['sunset'])});
+							  'zonoponder': BuienradarJS.lineZonOpOnder(brJson['Actual']['Sunrise'], brJson['Actual']['Sunset'])});
 						actualweather = tmpActual;
 
 				
-						zonopkomst = brJson['actual']['sunrise']
-						zononder = brJson['actual']['sunset']
+						zonopkomst = brJson['Actual']['Sunrise']
+						zononder = brJson['Actual']['Sunset']
 
 					}
 
 
 						// read 5-days weather forecast
 
-					var tmpNewDate = new Date(brJson['forecast']['fivedayforecast'][0]['day']);
+					var tmpNewDate = new Date(brJson['Forecast']['FiveDayForecast'][0]['Day']);
 					var tmpdagweek = weekday[tmpNewDate.getDay()];
 
 					var tmpForecast = [];	
@@ -243,25 +264,25 @@ App {
 						// load next 5 days forecast
 
 					for (var i = 0; i < 5; i++) {
-						var tmpNewDate = new Date(brJson['forecast']['fivedayforecast'][i]['day']);
+						var tmpNewDate = new Date(brJson['Forecast']['FiveDayForecast'][i]['Day']);
 						var tmpdagweek = weekday[tmpNewDate.getDay()];
-						var tmpUrl = brJson['forecast']['fivedayforecast'][i]['iconurl'].split("/");
+						var tmpUrl = brJson['Forecast']['FiveDayForecast'][i]['IconUrl'].split("/");
 						var dpicoonid = tmpUrl[tmpUrl.length - 1].substring(0, tmpUrl[tmpUrl.length - 1].length - 4);
 						var dpicoon = "qrc:/tsc/" + dpicoonid + ".png";
 						tmpForecast.push({'dagweek': tmpdagweek,
-							  'kanszon': brJson['forecast']['fivedayforecast'][i]['sunChance'].toString(),
-							  'kansregen': brJson['forecast']['fivedayforecast'][i]['rainChance'].toString(),
-							  'mintemp': brJson['forecast']['fivedayforecast'][i]['mintemperatureMin'].toString(),
-							  'maxtemp': brJson['forecast']['fivedayforecast'][i]['maxtemperatureMax'].toString(),
-							  'wind': brJson['forecast']['fivedayforecast'][i]['windDirection'].toUpperCase() + " " + brJson['forecast']['fivedayforecast'][i]['wind'].toString(),
+							  'kanszon': brJson['Forecast']['FiveDayForecast'][i]['SunChance'].toString(),
+							  'kansregen': brJson['Forecast']['FiveDayForecast'][i]['RainChance'].toString(),
+							  'mintemp': brJson['Forecast']['FiveDayForecast'][i]['MinTemperatureMin'].toString(),
+							  'maxtemp': brJson['Forecast']['FiveDayForecast'][i]['MaxTemperatureMax'].toString(),
+							  'wind': brJson['Forecast']['FiveDayForecast'][i]['WindDirection'].toUpperCase() + " " + brJson['Forecast']['FiveDayForecast'][i]['WindBeaufort'].toString(),
 							  'icoon': dpicoon});
 					}
 					fivedayforecast = tmpForecast;
 
 						//forecast title and text, remove special characters
 
-					weersverwachtingTitel = brJson['forecast']['weatherreport']['title'];
-					weersverwachtingTekst = brJson['forecast']['weatherreport']['text'];
+					weersverwachtingTitel = brJson['Forecast']['WeatherReport']['Title'];
+					weersverwachtingTekst = brJson['Forecast']['WeatherReport']['Text'];
 					var w = weersverwachtingTekst.indexOf("nbsp;");
 					while (w > 0) { 
 						var tmptx = weersverwachtingTekst.substring(0, w - 5) + " " + weersverwachtingTekst.substring(w + 5, weersverwachtingTekst.length);
