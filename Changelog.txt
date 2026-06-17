@@ -1,3 +1,6 @@
+9.1.11
+- buienradar reversed the json changes. This release is a copy of the old version 9.0.11
+
 9.1.1
 - fix windrichting on tile
 
